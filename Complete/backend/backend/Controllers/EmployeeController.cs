@@ -3,11 +3,13 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BackendWebApi.Domain;
 
 namespace BackendWebApi.Controllers
 {
+    /// <summary>
+    /// Контроллер, для обработки входящих на сервер запросов
+    /// </summary>
     [ApiController]
     [Route("api/employees")]
     public class EmployeeController : ControllerBase
@@ -21,6 +23,11 @@ namespace BackendWebApi.Controllers
             this.employeeRepository = employeeRepository;
         }
 
+        /// <summary>
+        /// Получение полного списка сотрудников
+        /// GET api/employees
+        /// </summary>
+        /// <returns>Всех сотрудников в списке</returns>
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
@@ -28,24 +35,36 @@ namespace BackendWebApi.Controllers
             return employeeRepository.GetEmployees().ToList();
         }
 
+        /// <summary>
+        /// Добавление/Измененние Сотрудника
+        /// POST api/employees
+        /// </summary>
+        /// <param name="employee">Сотрудник, которого нужно добавить/изменить</param>
+        /// <returns>Статус запроса</returns>
         [HttpPost]
         public IActionResult Post(Employee employee)
         {
             try { 
-            Console.WriteLine("Post employees init");
-            if (ModelState.IsValid)
-            {
-                employeeRepository.SaveEmployee(employee);
-                return Ok();
-            }
-            return BadRequest(ModelState);
-        }
-            catch (Exception e)
-            {
+                Console.WriteLine("Post employees init");
+                if (ModelState.IsValid)
+                {
+                    employeeRepository.SaveEmployee(employee);
+                    return Ok();
+                }
                 return BadRequest(ModelState);
             }
+                catch (Exception e)
+                {
+                    return BadRequest(ModelState);
+                }
+        }
 
-}
+        /// <summary>
+        /// Добавление/Измененние Сотрудника
+        /// PUT api/employees
+        /// </summary>
+        /// <param name="employee">Сотрудник, которого нужно добавить/изменить</param>
+        /// <returns>Статус запроса</returns>
         [HttpPut]
         public IActionResult Put(Employee employee)
         {
@@ -59,6 +78,12 @@ namespace BackendWebApi.Controllers
             return BadRequest(ModelState);
         }
 
+        /// <summary>
+        /// Удаление Сотрудника
+        /// DELETE api/employees
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Статус запроса</returns>
         [HttpDelete]
         public IActionResult Delete(int id)
         {

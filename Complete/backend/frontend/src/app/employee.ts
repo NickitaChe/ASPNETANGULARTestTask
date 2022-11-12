@@ -1,5 +1,5 @@
 export class Employee {
-    
+    //Класс сотрудник
     constructor(
       public EmployeeID: number = 0,
       public EmployeeName: string = "",

@@ -11,26 +11,30 @@ export  class ShowComponent implements OnInit {
 
   constructor(private service:SharedService) { }
 
+  //Список Сотрудников и Список отфильтрованных сотрудников
   EmployeeList:any=[];
   EmployeeListWithoutFilter!:Employee[];
 
+  //При открытии страницы
   ngOnInit(): void {
     this.refreshEmployeeList();
   }
 
+  //Название Содального окна
   ModalTitle?: string;
+  //Статус Модального окна
   ActivateAddEditEmployee:boolean= false;
   Employee:any;
 
 
-
+  //Фильтры
   DepartmentFilter: string = "";
   EmployeeNameFilter: string = "";
   SalaryFilter!: number;
   DateOfJoiningFilter!: Date;
 
 
-
+  //Кнопка добавления нового сотрудника
   addClick(){
     this.Employee={
       EmployeeID:0,
@@ -41,20 +45,22 @@ export  class ShowComponent implements OnInit {
     }
     this.ModalTitle="Добавить сотрудника"
     this.ActivateAddEditEmployee=true;
-
   }
 
+  //Закрытие модального окна
   closeClick(){
     this.ActivateAddEditEmployee=false;
     this.refreshEmployeeList();
   }
 
+  //Кнопка изменить сотрудника
   editClick(item:any){
     this.Employee=item;
     this.ModalTitle="Добавить сотрудника"
     this.ActivateAddEditEmployee=true;
   }
 
+  //Кнопка удаления сотрудника
   deleteClick(item:any){
     if(confirm("Действие безвозвратно удалит сотрудника "+ item.EmployeeName)){
       this.ModalTitle="Сотрудник удален"
@@ -64,6 +70,8 @@ export  class ShowComponent implements OnInit {
       this.ModalTitle="Действие отмененно"
     }
   }
+
+  //Получение данных с сервера
   refreshEmployeeList(){
     this.service.getEmpList().subscribe(data=>{
       this.EmployeeList=data;
@@ -71,6 +79,7 @@ export  class ShowComponent implements OnInit {
     });
   }
 
+  //Обработка фильтров
   FilterFn(){
     var DepartmentFilter = this.DepartmentFilter;
     var EmployeeNameFilter = this.EmployeeNameFilter;
@@ -92,6 +101,7 @@ export  class ShowComponent implements OnInit {
     });
   }
 
+  //Обработка сортировки
   sortResult(prop: string, asc: boolean) {
     this.EmployeeList = this.EmployeeList?.sort(function (a:any, b:any) {
       switch (prop) {

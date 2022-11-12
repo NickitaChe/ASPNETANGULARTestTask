@@ -12,16 +12,18 @@ export class AddEditComponent implements OnInit {
   constructor(private service: SharedService) { 
   }
 
+  //Получаем сотрудника, открывая модальное окно
   @Input() 
     Employee!:Employee;
 
-
+  //Кнопка для добавления Сотрудника
   addEmployee(){
     this.service.addEmployee(this.Employee).subscribe(res=>{
       alert("Сохраненно")
     }
     )
   }
+  //Кнопка для обновления Сотрудника
   updateEmployee(){
     this.service.editEmployee(this.Employee).subscribe(res=>{
       alert("Обновленно")

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BackendWebApi.Domain
 {
+    /// <summary>
+    /// Класс Сотрудник
+    /// </summary>
     public class Employee
     {
         [Required]
