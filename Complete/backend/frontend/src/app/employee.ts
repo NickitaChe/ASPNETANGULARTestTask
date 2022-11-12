@@ -5,6 +5,7 @@ export class Employee {
       public EmployeeName: string = "",
       public Department: string = "",
       public DateOfJoining: Date = new Date(),
+      public DateOfBirth: Date = new Date(),
       public Salary: number = 0
     ) { }
   }

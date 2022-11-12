@@ -17,6 +17,9 @@ namespace BackendWebApi.Domain
         [Display(Name = "Отдел")]
         public string Department { get; set; }
 
+        [Display(Name = "Дата рождения")]
+        public string DateOfBirth { get; set; }
+
         [Display(Name = "Дата устройства на работу")]
         public string DateOfJoining { get; set; }
 

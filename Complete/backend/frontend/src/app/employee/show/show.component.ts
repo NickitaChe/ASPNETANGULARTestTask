@@ -32,6 +32,7 @@ export  class ShowComponent implements OnInit {
   EmployeeNameFilter: string = "";
   SalaryFilter!: number;
   DateOfJoiningFilter!: Date;
+  DateOfBirthFilter!: Date;
 
 
   //Кнопка добавления нового сотрудника
@@ -41,6 +42,7 @@ export  class ShowComponent implements OnInit {
       EmployeeName:"",
       Department:"",
       DateOfJoining:"1900-01-01",
+      DateOfBirth:"1900-01-01",
       Salary:0
     }
     this.ModalTitle="Добавить сотрудника"
@@ -85,6 +87,7 @@ export  class ShowComponent implements OnInit {
     var EmployeeNameFilter = this.EmployeeNameFilter;
     var DateOfJoiningFilter = this.DateOfJoiningFilter;
     var SalaryFilter = this.SalaryFilter;
+    var DateOfBirthFilter = this.DateOfBirthFilter;
 
     this.EmployeeList = this.EmployeeListWithoutFilter.filter(function (el) {
       return el.Department?.toString().toLowerCase().includes(
@@ -98,6 +101,8 @@ export  class ShowComponent implements OnInit {
         el.Salary >= SalaryFilter
         &&
         DateOfJoiningFilter == null? true:el.DateOfJoining >= DateOfJoiningFilter
+        &&
+        DateOfBirthFilter == null? true:el.DateOfBirth >= DateOfBirthFilter
     });
   }
 
@@ -128,6 +133,12 @@ export  class ShowComponent implements OnInit {
               return (a.Salary > b.Salary) ? 1 : ((a.Salary < b.Salary) ? -1 : 0);
             }
               return (b.Salary > a.Salary) ? 1 : ((b.Salary < a.Salary) ? -1 : 0);
+        }
+        case 'DateOfBirth': {
+          if (asc) {
+            return (a.DateOfBirth > b.DateOfBirth) ? 1 : ((a.DateOfBirth < b.DateOfBirth) ? -1 : 0);
+          }
+            return (b.DateOfBirth > a.DateOfBirth) ? 1 : ((b.DateOfBirth < a.DateOfBirth) ? -1 : 0);
         }
         default:
           return 0;
