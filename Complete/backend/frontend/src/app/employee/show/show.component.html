@@ -8,7 +8,7 @@
 </button>
 
 <!-- Модальное окно -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-target="#modal" >
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,9 +19,9 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        <div class="modal-body">
-            <app-add-edit [Employee]="Employee" *ngIf="ActivateAddEditEmployee"></app-add-edit>
-        </div>
+            <div class="modal-body">
+                <app-add-edit [Employee]="Employee" *ngIf="ActivateAddEditEmployee"></app-add-edit>
+            </div>
         </div>
     </div>
 </div>
@@ -146,21 +146,23 @@
             <td>{{dataItem.DateOfJoining}}</td>
             <td>{{dataItem.DateOfBirth}}</td>
             <td>{{dataItem.Salary}}</td>
-            <td class=" d-flex">
-                <button type="button" class="btn btn-warning btn-sm"
-                data-toggle="modal" data-target="#exampleModal"
-                (click)="editClick(dataItem)"
-                data-backdrop="static" data-keyboard="false">
-                        Изменить
-                </button>
-                <b>&nbsp;</b>
-
-                <button type="button" class="btn btn-danger btn-sm "
-                data-toggle="modal" data-target="#exampleModal"
-                (click)="deleteClick(dataItem)"
-                data-backdrop="static" data-keyboard="false">
-                        Удалить
-                </button>
+            <td>
+                <div class="d-flex align-items-center" >
+                    <button type="button" class="btn btn-warning btn-sm"
+                    data-toggle="modal" data-target="#exampleModal"
+                    (click)="editClick(dataItem)"
+                    data-backdrop="static" data-keyboard="false">
+                            Изменить
+                    </button>
+                    <b>&nbsp;</b>
+    
+                    <button type="button" class="btn btn-danger btn-sm "
+                    data-toggle="modal" data-target="#exampleModal"
+                    (click)="deleteClick(dataItem)"
+                    data-backdrop="static" data-keyboard="false">
+                            Удалить
+                    </button>
+                </div>
             </td>
         </tr>
     </tbody>

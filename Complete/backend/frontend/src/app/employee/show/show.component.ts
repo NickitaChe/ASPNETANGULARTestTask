@@ -47,6 +47,7 @@ export  class ShowComponent implements OnInit {
     }
     this.ModalTitle="Добавить сотрудника"
     this.ActivateAddEditEmployee=true;
+    this.refreshEmployeeList();
   }
 
   //Закрытие модального окна
@@ -60,6 +61,7 @@ export  class ShowComponent implements OnInit {
     this.Employee=item;
     this.ModalTitle="Добавить сотрудника"
     this.ActivateAddEditEmployee=true;
+    this.refreshEmployeeList();
   }
 
   //Кнопка удаления сотрудника
@@ -67,10 +69,10 @@ export  class ShowComponent implements OnInit {
     if(confirm("Действие безвозвратно удалит сотрудника "+ item.EmployeeName)){
       this.ModalTitle="Сотрудник удален"
       this.service.deleteEmployee(item.EmployeeID).subscribe();
-      this.refreshEmployeeList();
     }else{
       this.ModalTitle="Действие отмененно"
     }
+    this.refreshEmployeeList();
   }
 
   //Получение данных с сервера
