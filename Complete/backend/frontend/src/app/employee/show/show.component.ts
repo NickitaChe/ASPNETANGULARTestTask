@@ -28,9 +28,9 @@ export  class ShowComponent implements OnInit {
 
 
   //Фильтры
-  DepartmentFilter: string = "";
-  EmployeeNameFilter: string = "";
-  SalaryFilter!: number;
+  DepartmentFilter: string ='';
+  EmployeeNameFilter: string ='';
+  SalaryFilter: number = 0;
   DateOfJoiningFilter!: Date;
   DateOfBirthFilter!: Date;
 
@@ -89,21 +89,21 @@ export  class ShowComponent implements OnInit {
     var SalaryFilter = this.SalaryFilter;
     var DateOfBirthFilter = this.DateOfBirthFilter;
 
+    
     this.EmployeeList = this.EmployeeListWithoutFilter.filter(function (el) {
-      return el.Department?.toString().toLowerCase().includes(
-        DepartmentFilter.toString().trim().toLowerCase()
-      )
+      return el.EmployeeName?.toString().toLowerCase().includes(
+        EmployeeNameFilter.toString().trim().toLowerCase())
         &&
-        el.EmployeeName?.toString().toLowerCase().includes(
-          EmployeeNameFilter.toString().trim().toLowerCase()
-        )
+        el.Department?.toString().toLowerCase().includes(
+          DepartmentFilter.toString().trim().toLowerCase())
         &&
         el.Salary >= SalaryFilter
         &&
-        DateOfJoiningFilter == null? true:el.DateOfJoining >= DateOfJoiningFilter
+        (DateOfBirthFilter == null? true: el.DateOfBirth>=DateOfBirthFilter)
         &&
-        DateOfBirthFilter == null? true:el.DateOfBirth >= DateOfBirthFilter
+        (DateOfJoiningFilter == null? true: el.DateOfJoining>=DateOfJoiningFilter)
     });
+    
   }
 
   //Обработка сортировки

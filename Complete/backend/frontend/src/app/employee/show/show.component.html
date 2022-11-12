@@ -76,7 +76,7 @@
                 Дата Устройства
                 <div class="d-flex flex-row">
                     <input type="date" [(ngModel)]="DateOfJoiningFilter" class="form-control"
-                    (change)="FilterFn()" placeholder="2020-01-01">
+                    (keyup)="FilterFn()" placeholder="2020-01-01">
                     
                     <button type="button" class="btn btn-light"
                     (click)="sortResult('DateOfJoining',true)">
