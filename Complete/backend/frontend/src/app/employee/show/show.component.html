@@ -1,0 +1,145 @@
+
+<!-- Кнопка создания нового сотрудника -->
+<button type="button" class="btn btn-primary mr-1"
+                data-toggle="modal" data-target="#exampleModal"
+                (click)="addClick()"
+                data-backdrop="static" data-keyboard="false">
+          Добавить
+</button>
+
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+                <button type="button" class="btn btn-danger"
+                        data-dismiss="modal" aria-label="Close"
+                        (click)="closeClick()">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <div class="modal-body">
+            <app-add-edit [Employee]="Employee" *ngIf="ActivateAddEditEmployee"></app-add-edit>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- Таблица сотрудников -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Имя Сотрудника
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="EmployeeNameFilter" class="form-control"
+                    (keyup)="FilterFn()" placeholder="Иванов Иван">
+                    
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('EmployeeName',true)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('EmployeeName',false)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                      </svg>
+                    </button>
+                </div>
+            </th>
+            <th>
+                Отдел
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="DepartmentFilter" class="form-control"
+                    (keyup)="FilterFn()" placeholder="IT">
+
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('Department',true)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('Department',false)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                      </svg>
+                    </button>
+                </div>
+            </th>
+            <th>
+                Дата Устройства
+                <div class="d-flex flex-row">
+                    <input type="date" [(ngModel)]="DateOfJoiningFilter" class="form-control"
+                    (change)="FilterFn()" placeholder="2020-01-01">
+                    
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('DateOfJoining',true)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('DateOfJoining',false)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                      </svg>
+                    </button>
+                </div>
+            </th>
+            <th>
+                Зарплата
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="SalaryFilter" class="form-control"
+                    (keyup)="FilterFn()" placeholder="0">
+
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('Salary',true)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    </button>
+
+                    <button type="button" class="btn btn-light"
+                    (click)="sortResult('Salary',false)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 3.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM8 6a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 .708-.708L7.5 12.293V6.5A.5.5 0 0 1 8 6z"/>
+                      </svg>
+                    </button>
+                </div>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Из списка Employeelist получаем всех сотрудников и добавляем в строку таблицы -->
+        <tr *ngFor="let dataItem of EmployeeList">
+            <td>{{dataItem.EmployeeName}}</td>
+            <td>{{dataItem.Department}}</td>
+            <td>{{dataItem.DateOfJoining}}</td>
+            <td>{{dataItem.Salary}}</td>
+            <td class=" d-flex">
+                <button type="button" class="btn btn-warning btn-sm"
+                data-toggle="modal" data-target="#exampleModal"
+                (click)="editClick(dataItem)"
+                data-backdrop="static" data-keyboard="false">
+                        Изменить
+                </button>
+                <b>&nbsp;</b>
+
+                <button type="button" class="btn btn-danger btn-sm "
+                data-toggle="modal" data-target="#exampleModal"
+                (click)="deleteClick(dataItem)"
+                data-backdrop="static" data-keyboard="false">
+                        Удалить
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
